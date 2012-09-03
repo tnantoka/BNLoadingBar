@@ -17,46 +17,6 @@
 @implementation BNLoadingBarInnerView
 @end
 
-
-@interface BNLoadingBarWebViewDelegate : NSObject <UIWebViewDelegate>
-
-@property (nonatomic, assign) id originDelegate;
-
-@end
-@implementation BNLoadingBarWebViewDelegate
-
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
-    if ([_originDelegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
-        return [_originDelegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
-    }
-    
-    return YES;
-}
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    [BNLoadingBar showForView:webView WithMessage:@"Loading..." hasIndicator:YES];
-    
-    if ([_originDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
-        [_originDelegate webViewDidStartLoad:webView];
-    }
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    if ([_originDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-        [_originDelegate webViewDidFinishLoad:webView];
-    }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    if ([_originDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
-        [_originDelegate webView:webView didFailLoadWithError:error];
-    }
-}
-
-@end
-
-
 @implementation BNLoadingBar
 
 + (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator {
@@ -123,17 +83,5 @@
         }
     }
 }
-
-+ (void)showForWebView:(UIWebView *)webView {
-    BNLoadingBarWebViewDelegate *loadingBarDelegate = [[BNLoadingBarWebViewDelegate alloc] init];
-    loadingBarDelegate.originDelegate = webView.delegate;
-    webView.delegate = loadingBarDelegate;
-
-#if !__has_feature(objc_arc)
-    [loadingBarDelegate autorelease];
-#endif
-}
-
-
 
 @end

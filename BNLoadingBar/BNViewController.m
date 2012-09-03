@@ -121,20 +121,22 @@
 # pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    NSLog(@"Called shouldStart");
     return YES;
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"Called didStart");
+    //[BNLoadingBar hideForView:self.view];
+    //[BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"Called didFinish");
+    //[BNLoadingBar hideForView:self.view];
+    //[BNLoadingBar showForView:self.view WithMessage:@"Loaded" hasIndicator:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"Called didFail");
+    //[BNLoadingBar hideForView:self.view];
+    [BNLoadingBar showForView:self.view WithMessage:[error localizedDescription] hasIndicator:NO];
 }
 
 
