@@ -16,6 +16,8 @@
 		9B56183D15F48A9D00D04A1B /* BNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B56183C15F48A9D00D04A1B /* BNViewController.m */; };
 		9B56184015F48A9D00D04A1B /* BNViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B56183E15F48A9D00D04A1B /* BNViewController_iPhone.xib */; };
 		9B56184315F48A9D00D04A1B /* BNViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B56184115F48A9D00D04A1B /* BNViewController_iPad.xib */; };
+		9B5C9FB515F48B800092D059 /* BNLoadingBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5C9FB415F48B800092D059 /* BNLoadingBar.m */; };
+		9B5C9FBF15F494B80092D059 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B5C9FBE15F494B80092D059 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,9 @@
 		9B56183C15F48A9D00D04A1B /* BNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BNViewController.m; sourceTree = "<group>"; };
 		9B56183F15F48A9D00D04A1B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BNViewController_iPhone.xib; sourceTree = "<group>"; };
 		9B56184215F48A9D00D04A1B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/BNViewController_iPad.xib; sourceTree = "<group>"; };
+		9B5C9FB315F48B800092D059 /* BNLoadingBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNLoadingBar.h; sourceTree = "<group>"; };
+		9B5C9FB415F48B800092D059 /* BNLoadingBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNLoadingBar.m; sourceTree = "<group>"; };
+		9B5C9FBE15F494B80092D059 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5C9FBF15F494B80092D059 /* QuartzCore.framework in Frameworks */,
 				9B56182A15F48A9D00D04A1B /* UIKit.framework in Frameworks */,
 				9B56182C15F48A9D00D04A1B /* Foundation.framework in Frameworks */,
 				9B56182E15F48A9D00D04A1B /* CoreGraphics.framework in Frameworks */,
@@ -52,6 +58,7 @@
 		9B56181A15F48A9D00D04A1B = {
 			isa = PBXGroup;
 			children = (
+				9B5C9FBE15F494B80092D059 /* QuartzCore.framework */,
 				9B56182F15F48A9D00D04A1B /* BNLoadingBar */,
 				9B56182815F48A9D00D04A1B /* Frameworks */,
 				9B56182615F48A9D00D04A1B /* Products */,
@@ -79,6 +86,7 @@
 		9B56182F15F48A9D00D04A1B /* BNLoadingBar */ = {
 			isa = PBXGroup;
 			children = (
+				9B56184915F48ADC00D04A1B /* BNLoadingBar */,
 				9B56183815F48A9D00D04A1B /* BNAppDelegate.h */,
 				9B56183915F48A9D00D04A1B /* BNAppDelegate.m */,
 				9B56183B15F48A9D00D04A1B /* BNViewController.h */,
@@ -99,6 +107,15 @@
 				9B56183715F48A9D00D04A1B /* BNLoadingBar-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9B56184915F48ADC00D04A1B /* BNLoadingBar */ = {
+			isa = PBXGroup;
+			children = (
+				9B5C9FB315F48B800092D059 /* BNLoadingBar.h */,
+				9B5C9FB415F48B800092D059 /* BNLoadingBar.m */,
+			);
+			path = BNLoadingBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +186,7 @@
 				9B56183615F48A9D00D04A1B /* main.m in Sources */,
 				9B56183A15F48A9D00D04A1B /* BNAppDelegate.m in Sources */,
 				9B56183D15F48A9D00D04A1B /* BNViewController.m in Sources */,
+				9B5C9FB515F48B800092D059 /* BNLoadingBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +241,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -243,7 +261,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -257,6 +275,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BNLoadingBar/BNLoadingBar-Prefix.pch";
 				INFOPLIST_FILE = "BNLoadingBar/BNLoadingBar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -268,6 +287,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BNLoadingBar/BNLoadingBar-Prefix.pch";
 				INFOPLIST_FILE = "BNLoadingBar/BNLoadingBar-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -292,6 +312,7 @@
 				9B56184815F48A9D00D04A1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
