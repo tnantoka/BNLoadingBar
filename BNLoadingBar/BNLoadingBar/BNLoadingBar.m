@@ -14,26 +14,27 @@
 #define DELAY 0.0f
 
 @interface BNLoadingBarInnerView : UIView
+@property (nonatomic, assign) BNLoadingBarPosition position;
 @end
 @implementation BNLoadingBarInnerView
 @end
 
 @implementation BNLoadingBar
 
-+ (void)showForView:(UIView *)view WithMessage:(NSString *)message {
-    [self showForView:view WithMessage:message hasIndicator:YES];
++ (void)showForView:(UIView *)view withMessage:(NSString *)message {
+    [self showForView:view withMessage:message hasIndicator:YES];
 }
 
     
-+ (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator {
-    [self showForView:view WithMessage:message hasIndicator:hasIndicator position:BNLoadingBarPositionBottomLeft];
++ (void)showForView:(UIView *)view withMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator {
+    [self showForView:view withMessage:message hasIndicator:hasIndicator position:BNLoadingBarPositionBottomLeft];
 }
 
-+ (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator position:(BNLoadingBarPosition)position {
++ (void)showForView:(UIView *)view withMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator position:(BNLoadingBarPosition)position {
 
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:[BNLoadingBarInnerView class]]) {
-            [self hideForView:view];
+            [self hideForView:view delay:DELAY position:position];
             //return;
         }
     }
@@ -85,7 +86,8 @@
             break;
     }
         
-    UIView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(loadingBarX, loadingBarY, width, height)];
+    BNLoadingBarInnerView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(loadingBarX, loadingBarY, width, height)];
+    loadingBar.position = position;
     loadingBar.layer.shadowOpacity = 0.2f;
     loadingBar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     loadingBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
@@ -125,6 +127,20 @@
 
 + (void)hideForView:(UIView *)view {
     [self hideForView:view delay:DELAY];
+}
+
++ (void)hideForView:(UIView *)view delay:(float)delay position:(BNLoadingBarPosition)position {
+    for (UIView *v in view.subviews) {
+        if ([v isKindOfClass:[BNLoadingBarInnerView class]]) {
+            if (((BNLoadingBarInnerView *)v).position == position) {
+                [UIView animateWithDuration:DURATION delay:delay options:0 animations:^{
+                    v.layer.opacity = 0.0f;
+                } completion:^(BOOL finished) {
+                    [v removeFromSuperview];
+                }];
+            }
+        }
+    }    
 }
 
 @end

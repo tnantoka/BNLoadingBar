@@ -99,23 +99,23 @@
 # pragma mark - Button actions
 
 - (void)showAction:(id)sender {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:YES];
 }
 
 - (void)withoutAction:(id)sender {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:NO];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:NO];
 }
 
 - (void)topLeftAction:(id)sender {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopLeft];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopLeft];
 }
 
 - (void)topRightAction:(id)sender {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopRight];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopRight];
 }
 
 - (void)bottomRightAction:(id)sender {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionBottomRight];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionBottomRight];
 }
 
 - (void)hideAction:(id)sender {
@@ -146,7 +146,7 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES];
+    [BNLoadingBar showForView:self.view withMessage:@"Loading..." hasIndicator:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -154,7 +154,7 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    [BNLoadingBar showForView:self.view WithMessage:[error localizedDescription] hasIndicator:NO];
+    [BNLoadingBar showForView:self.view withMessage:[error localizedDescription] hasIndicator:NO];
     [BNLoadingBar hideForView:self.view delay:2.0f];
 }
 
