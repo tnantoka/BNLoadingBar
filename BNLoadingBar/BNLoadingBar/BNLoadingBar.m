@@ -20,7 +20,16 @@
 
 @implementation BNLoadingBar
 
++ (void)showForView:(UIView *)view WithMessage:(NSString *)message {
+    [self showForView:view WithMessage:message hasIndicator:YES];
+}
+
+    
 + (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator {
+    [self showForView:view WithMessage:message hasIndicator:hasIndicator position:BNLoadingBarPositionBottomLeft];
+}
+
++ (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator position:(BNLoadingBarPosition)position {
 
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:[BNLoadingBarInnerView class]]) {
@@ -35,28 +44,51 @@
     indicator.frame = CGRectMake(margin, margin, indicator.frame.size.width, indicator.frame.size.height);
     [indicator startAnimating];
     
-    float x = hasIndicator ? indicator.frame.origin.x + indicator.frame.size.width + margin : margin;
+    float messageLabelX = hasIndicator ? indicator.frame.origin.x + indicator.frame.size.width + margin : margin;
     
-    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(x, margin, 0, 0)];
+    UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(messageLabelX, margin, 0, 0)];
     messageLabel.text = message;
     messageLabel.font = [UIFont systemFontOfSize:13.0f];
     [messageLabel sizeToFit];
     messageLabel.textColor = [UIColor whiteColor];
     messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.center = CGPointMake(messageLabel.center.x, indicator.center.y);
+    messageLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    float maxWidth = view.frame.size.width * 0.8;
+    float maxWidth = view.frame.size.width * 0.9;
     if (messageLabel.frame.size.width > maxWidth) {
         messageLabel.frame = CGRectMake(messageLabel.frame.origin.x, messageLabel.frame.origin.y, maxWidth, messageLabel.frame.size.height);
     }
     
     float height = indicator.frame.size.height + margin * 2;
-    float width = x + messageLabel.frame.size.width + margin;
+    float width = messageLabelX + messageLabel.frame.size.width + margin;
 
-    UIView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(0, view.bounds.size.height - height - 0.5f, width, height)];
+    float loadingBarX;
+    float loadingBarY;
+    
+    switch (position) {
+        case BNLoadingBarPositionTopLeft:
+            loadingBarX = 0;
+            loadingBarY = 0;
+            break;
+        case BNLoadingBarPositionBottomLeft:
+            loadingBarX = 0;
+            loadingBarY = view.bounds.size.height - height;
+            break;
+        case BNLoadingBarPositionTopRight:
+            loadingBarX = view.bounds.size.width - width;
+            loadingBarY = 0;
+            break;
+        case BNLoadingBarPositionBottomRight:
+            loadingBarY = view.bounds.size.height - height;
+            loadingBarX = view.bounds.size.width - width;
+            break;
+    }
+        
+    UIView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(loadingBarX, loadingBarY, width, height)];
     loadingBar.layer.shadowOpacity = 0.2f;
     loadingBar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-    loadingBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    loadingBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     loadingBar.backgroundColor = [UIColor blackColor];
 
     if (hasIndicator) {

@@ -51,14 +51,21 @@
     
     self.navigationController.toolbarHidden = NO;
     UIBarButtonItem *showItem = [[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStyleBordered target:self action:@selector(showAction:)];
-    UIBarButtonItem *withoutItem = [[UIBarButtonItem alloc] initWithTitle:@"Without Indicator" style:UIBarButtonItemStyleBordered target:self action:@selector(withoutAction:)];
+    UIBarButtonItem *withoutItem = [[UIBarButtonItem alloc] initWithTitle:@"Plain" style:UIBarButtonItemStyleBordered target:self action:@selector(withoutAction:)];
     UIBarButtonItem *hideItem = [[UIBarButtonItem alloc] initWithTitle:@"Hide" style:UIBarButtonItemStyleBordered target:self action:@selector(hideAction:)];
-    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *topLeftItem = [[UIBarButtonItem alloc] initWithTitle:@"TL" style:UIBarButtonItemStyleBordered target:self action:@selector(topLeftAction:)];
+    UIBarButtonItem *topRightItem = [[UIBarButtonItem alloc] initWithTitle:@"TR" style:UIBarButtonItemStyleBordered target:self action:@selector(topRightAction:)];
+    UIBarButtonItem *bottomRightItem = [[UIBarButtonItem alloc] initWithTitle:@"BR" style:UIBarButtonItemStyleBordered target:self action:@selector(bottomRightAction:)];
+    
+    
     
     NSArray *toolbarItems = [NSArray arrayWithObjects:
                              showItem,
                              withoutItem,
-                             flexibleItem,
+                             topLeftItem,
+                             topRightItem,
+                             bottomRightItem,
                              hideItem,
                              nil];
     self.toolbarItems = toolbarItems;
@@ -66,7 +73,9 @@
     [showItem release];
     [withoutItem release];
     [hideItem release];
-    [flexibleItem release];
+    [topLeftItem release];
+    [topRightItem release];
+    [bottomRightItem release];
     
 }
 
@@ -95,6 +104,18 @@
 
 - (void)withoutAction:(id)sender {
     [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:NO];
+}
+
+- (void)topLeftAction:(id)sender {
+    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopLeft];
+}
+
+- (void)topRightAction:(id)sender {
+    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionTopRight];
+}
+
+- (void)bottomRightAction:(id)sender {
+    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES position:BNLoadingBarPositionBottomRight];
 }
 
 - (void)hideAction:(id)sender {

@@ -8,9 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    BNLoadingBarPositionTopLeft,
+    BNLoadingBarPositionBottomLeft,
+    BNLoadingBarPositionTopRight,
+    BNLoadingBarPositionBottomRight
+} BNLoadingBarPosition;
+
 @interface BNLoadingBar : NSObject
 
++ (void)showForView:(UIView *)view WithMessage:(NSString *)message;
 + (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator;
++ (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator position:(BNLoadingBarPosition)position;
+
 + (void)hideForView:(UIView *)view;
 + (void)hideForView:(UIView *)view delay:(float)delay;
 
