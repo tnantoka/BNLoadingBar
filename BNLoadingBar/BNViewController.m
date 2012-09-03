@@ -125,18 +125,16 @@
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    //[BNLoadingBar hideForView:self.view];
-    //[BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES];
+    [BNLoadingBar showForView:self.view WithMessage:@"Loading..." hasIndicator:YES];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    //[BNLoadingBar hideForView:self.view];
-    //[BNLoadingBar showForView:self.view WithMessage:@"Loaded" hasIndicator:YES];
+    [BNLoadingBar hideForView:self.view];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    //[BNLoadingBar hideForView:self.view];
     [BNLoadingBar showForView:self.view WithMessage:[error localizedDescription] hasIndicator:NO];
+    [BNLoadingBar hideForView:self.view delay:2.0f];
 }
 
 

@@ -12,5 +12,6 @@
 
 + (void)showForView:(UIView *)view WithMessage:(NSString *)message hasIndicator:(BOOL)hasIndicator;
 + (void)hideForView:(UIView *)view;
++ (void)hideForView:(UIView *)view delay:(float)delay;
 
 @end

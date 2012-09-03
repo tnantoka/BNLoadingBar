@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define DURATION 0.2f
+#define DELAY 0.0f
 
 @interface BNLoadingBarInnerView : UIView
 @end
@@ -23,7 +24,8 @@
 
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:[BNLoadingBarInnerView class]]) {
-            return;
+            [self hideForView:view];
+            //return;
         }
     }
     
@@ -43,10 +45,13 @@
     messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.center = CGPointMake(messageLabel.center.x, indicator.center.y);
     
+    // Max width
+    messageLabel.frame = CGRectMake(messageLabel.frame.origin.x, messageLabel.frame.origin.y, view.frame.size.width * 0.8, messageLabel.frame.size.height);
+    
     float height = indicator.frame.size.height + margin * 2;
     float width = x + messageLabel.frame.size.width + margin;
 
-    UIView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(0, view.bounds.size.height - height, width, height)];
+    UIView *loadingBar = [[BNLoadingBarInnerView alloc] initWithFrame:CGRectMake(0, view.bounds.size.height - height - 0.5f, width, height)];
     loadingBar.layer.shadowOpacity = 0.2f;
     loadingBar.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     loadingBar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -72,16 +77,20 @@
 
 }
 
-+ (void)hideForView:(UIView *)view {
++ (void)hideForView:(UIView *)view delay:(float)delay {
     for (UIView *v in view.subviews) {
         if ([v isKindOfClass:[BNLoadingBarInnerView class]]) {
-            [UIView animateWithDuration:DURATION animations:^{
+            [UIView animateWithDuration:DURATION delay:delay options:0 animations:^{
                 v.layer.opacity = 0.0f;
             } completion:^(BOOL finished) {
                 [v removeFromSuperview];
             }];
         }
     }
+}
+
++ (void)hideForView:(UIView *)view {
+    [self hideForView:view delay:DELAY];
 }
 
 @end
