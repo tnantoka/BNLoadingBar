@@ -45,8 +45,10 @@
     messageLabel.backgroundColor = [UIColor clearColor];
     messageLabel.center = CGPointMake(messageLabel.center.x, indicator.center.y);
     
-    // Max width
-    messageLabel.frame = CGRectMake(messageLabel.frame.origin.x, messageLabel.frame.origin.y, view.frame.size.width * 0.8, messageLabel.frame.size.height);
+    float maxWidth = view.frame.size.width * 0.8;
+    if (messageLabel.frame.size.width > maxWidth) {
+        messageLabel.frame = CGRectMake(messageLabel.frame.origin.x, messageLabel.frame.origin.y, maxWidth, messageLabel.frame.size.height);
+    }
     
     float height = indicator.frame.size.height + margin * 2;
     float width = x + messageLabel.frame.size.width + margin;
